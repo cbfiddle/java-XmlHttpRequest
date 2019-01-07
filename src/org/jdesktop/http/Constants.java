@@ -67,4 +67,6 @@ public interface Constants {
 	String HEADER_CONTENT_BASE = "Content-Base";
 
 	String HEADER_AUTHORIZATION = "Authorization";
+
+	String HEADER_AUTHENTICATION = "Authentication";
 }

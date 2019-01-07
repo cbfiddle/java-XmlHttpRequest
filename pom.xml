@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.sabren</groupId>
+  <artifactId>java-xmlhttprequest</artifactId>
+  <version>1.0.0</version>
+
+  <repositories>
+    <repository>
+      <id>leonard-jcenter-cache</id>
+      <name>Leonard JCenter Cache</name>
+      <url>http://leonard.ca.objectiflune.com/artifactory/jcenter</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+
+    <!-- MAVEN -->
+    <repository>
+      <!-- disable Maven Central -->
+      <id>central</id>
+      <name>Maven Central Repository</name>
+      <url>http://repo.maven.apache.org/maven2</url>
+      <layout>default</layout>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+    <repository>
+      <id>jcenter</id>
+      <name>jcenter</name>
+      <url>https://jcenter.bintray.com</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+    <osgi.version>${project.version}.${maven.build.timestamp}-${env.BUILD_NUMBER}</osgi.version>
+  </properties>
+
+  <packaging>bundle</packaging>
+  <build>
+    <sourceDirectory>${basedir}\src</sourceDirectory>
+    <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>3.5.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <finalName>com.github.sabren.java.xmlhttprequest_${osgi.version}</finalName>
+          <instructions>
+            <Bundle-Version>${osgi.version}</Bundle-Version>
+            <Bundle-SymbolicName>com.github.sabren.java.xmlhttprequest;singleton:=true</Bundle-SymbolicName>
+            <Bundle-Name>java-XmlHttpRequest</Bundle-Name>
+            <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+            <Export-Package>
+              org.jdesktop.beans;version=${project.version};-noimport:=true,
+              org.jdesktop.dom;version=${project.version};-noimport:=true,
+              org.jdesktop.http;version=${project.version};-noimport:=true,
+              org.jdesktop.http.async;version=${project.version};-noimport:=true,
+              org.jdesktop.http.async.event;version=${project.version};-noimport:=true,
+              org.jdesktop.xpath;version=${project.version};-noimport:=true,
+              org.jdesktop.xpath.function;version=${project.version};-noimport:=true
+            </Export-Package>
+            <Import-Package>!javax.*</Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
