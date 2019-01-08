@@ -269,7 +269,43 @@ public class AsyncHttpRequest extends AbstractBean implements Constants {
 
         setReadyState(ReadyState.OPEN);
     }
-    
+
+    /**
+     * Sets the username to use for Basic Authentication. 
+     * 
+     * @param username the user name to use
+     */
+    public void setUsername(String username) {
+        this.req.setUsername(username);
+    }
+
+    /**
+     * Sets the passsword to use for Basic Authentication.
+     * 
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.req.setPassword(password);
+    }
+
+    /**
+     * Sets the username to use for Basic Authentication. 
+     * 
+     * @param username the user name to use
+     */
+    public String getUsername() {
+        return req.getUsername();
+    }
+
+    /**
+     * Sets the passsword to use for Basic Authentication.
+     * 
+     * @param password
+     */
+    public String getPassword() {
+        return req.getPassword();
+    }
+
     /**
      * Specifies a request header for the HTTP request.
      *
