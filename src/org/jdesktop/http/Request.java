@@ -251,7 +251,7 @@ public class Request extends AbstractBean implements Constants {
         headers.put(header.getName().toLowerCase(), header);
         
         // update the username/password if an auth header was just set
-        if (HEADER_AUTHENTICATION.equals(header.getName())) {
+        if (HEADER_AUTHORIZATION.equals(header.getName())) {
             try {
                 String encoded = header.getValue().substring(6);
                 String tmp = base64Decode(encoded);
@@ -509,9 +509,9 @@ public class Request extends AbstractBean implements Constants {
     private void resetAuthenticationHeader() {
         try {
             if (username == null) {
-                removeHeader(HEADER_AUTHENTICATION);
+                removeHeader(HEADER_AUTHORIZATION);
             } else {
-                headers.put(HEADER_AUTHENTICATION, new Header(HEADER_AUTHENTICATION, "Basic " + 
+                headers.put(HEADER_AUTHORIZATION, new Header(HEADER_AUTHORIZATION, "Basic " + 
                         base64Encode(username + ":" + getPassword())));
             }
         } catch (Exception e) {
